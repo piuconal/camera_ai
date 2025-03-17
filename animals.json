@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Hổ",
+    "scientific_name": "Panthera tigris",
+    "habitat": "Hổ chủ yếu sinh sống trong các khu rừng rậm nhiệt đới, đồng cỏ, rừng ngập mặn và thậm chí cả những vùng đồi núi. Chúng thường chọn những nơi có cây cối rậm rạp để dễ dàng ẩn nấp và săn mồi.",
+    "diet": "Hổ là loài săn mồi đỉnh cao trong chuỗi thức ăn. Chúng chủ yếu ăn thịt và săn các loài động vật có kích thước lớn như nai, lợn rừng, trâu rừng và thậm chí cả cá sấu. Khi thức ăn khan hiếm, chúng có thể săn cả những con mồi nhỏ hơn như chim hoặc bò sát.",
+    "lifespan": "Hổ có tuổi thọ trung bình từ 10 đến 15 năm trong tự nhiên. Tuy nhiên, khi được nuôi nhốt trong các khu bảo tồn hoặc sở thú, chúng có thể sống tới 20 - 25 năm nhờ chế độ ăn uống và chăm sóc tốt.",
+    "description": "Hổ là loài mèo lớn nhất thế giới và có thân hình mạnh mẽ với các vằn đen đặc trưng trên bộ lông cam rực rỡ. Chúng là những kẻ săn mồi đơn độc, có khả năng di chuyển linh hoạt và ẩn nấp tài tình. Hổ cũng là một trong những loài động vật đang bị đe dọa nghiêm trọng do mất môi trường sống và săn trộm.",
+    "image": "https://as2.ftcdn.net/v2/jpg/01/29/13/31/1000_F_129133169_qFi4lt8IXlhZbCZxgFWM4QkuaEql2SLi.jpg"
+  },
+  {
+    "name": "Voi châu Á",
+    "scientific_name": "Elephas maximus",
+    "habitat": "Voi châu Á sinh sống chủ yếu tại các khu rừng nhiệt đới, rừng khô, đồng cỏ và rừng rậm ven sông thuộc Nam Á và Đông Nam Á. Chúng thường di cư theo mùa để tìm nguồn nước và thức ăn.",
+    "diet": "Voi châu Á là loài động vật ăn cỏ, tiêu thụ khoảng 150 - 200 kg thực vật mỗi ngày. Chúng ăn nhiều loại thức ăn khác nhau như cỏ, lá cây, vỏ cây, trái cây và thậm chí cả hoa sen trong môi trường nước.",
+    "lifespan": "Tuổi thọ trung bình của voi châu Á dao động từ 50 - 70 năm trong môi trường hoang dã, tuy nhiên, trong điều kiện nuôi nhốt tốt, chúng có thể sống lâu hơn.",
+    "description": "Voi châu Á là loài động vật có vú lớn nhất châu Á với đặc điểm nhận dạng là đôi tai nhỏ hơn voi châu Phi và phần đầu có hình vòm. Chúng có trí thông minh cao, khả năng ghi nhớ tốt và thường sống theo bầy đàn do voi cái dẫn đầu.",
+    "image": "https://image.tienphong.vn/w1000/Uploaded/2020/qhj_hiobgobrfc/2018_11_22/tien_phong_voi_chau_a_inqa.jpg"
+  }
+]
