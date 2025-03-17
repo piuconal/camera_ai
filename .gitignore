@@ -1,0 +1,6 @@
+# Bỏ qua các file mô hình YOLO
+*.pt
+*.onnx
+*.tflite
+*.engine
+*.trt
