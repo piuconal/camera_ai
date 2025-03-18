@@ -38,9 +38,9 @@ $camera = $camera_result->fetch_assoc();
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="col-md-4">
                         <div class="card mb-3">
+                            <img src="<?= htmlspecialchars($row['information']) ?>" class="card-img-top" alt="Hình ảnh">
                             <div class="card-body">
                                 <h5 class="card-title"><?= htmlspecialchars($row['animal_name']) ?></h5>
-                                <p class="card-text"><?= htmlspecialchars($row['information']) ?></p>
                                 <p class="text-muted">Thời gian: <?= $row['created_at'] ?></p>
                             </div>
                         </div>
@@ -50,6 +50,7 @@ $camera = $camera_result->fetch_assoc();
         <?php else: ?>
             <p class="alert alert-warning">Không có hình ảnh nào từ camera này.</p>
         <?php endif; ?>
+
     </div>
 
     <script>

@@ -1,60 +1,101 @@
 import cv2
 import torch
+import os
+import mysql.connector
 from ultralytics import YOLO
+from flask import Flask, Response
+from datetime import datetime
 
-# Load mô hình YOLOv8 mới nhất (phiên bản nhỏ gọn nhưng chính xác)
-model = YOLO("yolov8s.pt")  # Có thể dùng "yolov8l.pt" hoặc "yolov8x.pt" cho độ chính xác cao hơn
+app = Flask(__name__)
 
-# Lấy danh sách tất cả các lớp từ mô hình COCO
+# Kết nối MySQL
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="camera_ai"
+)
+cursor = db.cursor()
+
+# Load YOLOv8 model
+model = YOLO("yolov8s.pt")
+
+# Get class names
 coco_classes = model.names
-
-# Lọc các lớp động vật (các lớp COCO trừ phương tiện, đồ vật, v.v.)
 animal_classes = [name for name in coco_classes.values() if name not in ["person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "bottle"]]
 
-# Mở camera
-cap = cv2.VideoCapture(0)  # 0 là webcam, có thể thay bằng đường dẫn video
+# Thư mục lưu ảnh
+IMAGE_DIR = "static/images/"
+os.makedirs(IMAGE_DIR, exist_ok=True)
 
-while cap.isOpened():
-    ret, frame = cap.read()
-    if not ret:
-        break
+def is_duplicate_image(camera_id, animal_name, timestamp):
+    """Kiểm tra xem ảnh có bị trùng (cùng tên + cùng thời gian) không."""
+    sql = "SELECT COUNT(*) FROM images WHERE camera_id = %s AND animal_name = %s AND created_at = %s"
+    cursor.execute(sql, (camera_id, animal_name, timestamp))
+    count = cursor.fetchone()[0]
+    return count > 0
 
-    # Chạy mô hình nhận diện
-    results = model(frame)
+def save_image_to_db(camera_id, animal_name, image_path, timestamp):
+    """Lưu thông tin ảnh vào bảng images nếu không bị trùng."""
+    if not is_duplicate_image(camera_id, animal_name, timestamp):
+        sql = "INSERT INTO images (camera_id, animal_name, information, created_at) VALUES (%s, %s, %s, %s)"
+        cursor.execute(sql, (camera_id, animal_name, image_path, timestamp))
+        db.commit()
+        print(f"✅ Đã lưu: {animal_name} - {image_path} ({timestamp})")
+    else:
+        print(f"⚠ Ảnh {animal_name} với thời gian {timestamp} đã tồn tại, bỏ qua.")
 
-    person_detected = False  # Kiểm tra xem có người không
+def generate_frames():
+    cap = cv2.VideoCapture(0)  # Chỉnh camera index nếu cần
+    camera_id = 1  # ID giả định, có thể lấy từ request hoặc config
 
-    # Duyệt qua kết quả nhận diện
-    for r in results:
-        boxes = r.boxes  # Lấy danh sách khung nhận diện
-        for box in boxes:
-            class_id = int(box.cls[0])
-            label = model.names[class_id]
-            conf = box.conf[0].item()  # Độ chính xác
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
 
-            if label in animal_classes or label == "person":
-                x1, y1, x2, y2 = map(int, box.xyxy[0])  # Lấy tọa độ khung
-                color = (0, 255, 0) if label != "person" else (0, 0, 255)  # Xanh lá cho động vật, đỏ cho người
-                
-                cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+        results = model(frame)
+        person_detected = False
 
-                text = f"{label} ({conf:.2f})"
-                cv2.putText(frame, text, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+        for r in results:
+            for box in r.boxes:
+                class_id = int(box.cls[0])
+                label = model.names[class_id]
+                conf = box.conf[0].item()
 
-                if label == "person":
-                    person_detected = True  # Đánh dấu có người
+                if label in animal_classes or label == "person":
+                    x1, y1, x2, y2 = map(int, box.xyxy[0])
+                    color = (0, 255, 0) if label != "person" else (0, 0, 255)
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+                    cv2.putText(frame, f"{label} ({conf:.2f})", (x1, y1 - 10), 
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-    # Cảnh báo nếu phát hiện con người
-    if person_detected:
-        cv2.putText(frame, "⚠ WARNING: Human detected!", (50, 50),
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
+                    if label == "person":
+                        person_detected = True
+                    elif label in animal_classes:
+                        # Lưu ảnh khi phát hiện động vật
+                        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Lấy thời gian chính xác
+                        image_filename = f"{label}_{timestamp.replace(':', '-').replace(' ', '_')}.jpg"
+                        image_path = os.path.join(IMAGE_DIR, image_filename)
+                        cv2.imwrite(image_path, frame)
 
-    # Hiển thị hình ảnh
-    cv2.imshow("Animal & Human Detection", frame)
+                        # Lưu vào database (tránh trùng lặp)
+                        save_image_to_db(camera_id, label, image_path, timestamp)
 
-    # Nhấn 'q' để thoát
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        if person_detected:
+            cv2.putText(frame, "⚠ WARNING: Human detected!", (50, 50),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
 
-cap.release()
-cv2.destroyAllWindows()
+        _, buffer = cv2.imencode('.jpg', frame)
+        frame_bytes = buffer.tobytes()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+
+    cap.release()
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)

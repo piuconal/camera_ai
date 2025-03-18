@@ -32,7 +32,7 @@ if (!isset($_GET['id'])) {
             </div>
         <?php else: ?>
             <h3>Camera Trực Tiếp</h3>
-            <video id="video" width="800" height="500" autoplay></video>
+            <img id="video" src="http://localhost:5000/video_feed" width="800" height="500">
         <?php endif; ?>
     </div>
 
