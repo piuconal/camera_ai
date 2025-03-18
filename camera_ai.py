@@ -28,63 +28,71 @@ animal_classes = [name for name in coco_classes.values() if name not in ["person
 IMAGE_DIR = "static/images/"
 os.makedirs(IMAGE_DIR, exist_ok=True)
 
-def is_duplicate_image(camera_id, animal_name, timestamp):
-    """Kiểm tra xem ảnh có bị trùng (cùng tên + cùng thời gian) không."""
+def is_duplicate_image(camera_id, object_name, timestamp):
     sql = "SELECT COUNT(*) FROM images WHERE camera_id = %s AND animal_name = %s AND created_at = %s"
-    cursor.execute(sql, (camera_id, animal_name, timestamp))
-    count = cursor.fetchone()[0]
-    return count > 0
+    cursor.execute(sql, (camera_id, object_name, timestamp))
+    return cursor.fetchone()[0] > 0
 
-def save_image_to_db(camera_id, animal_name, image_path, timestamp):
-    """Lưu thông tin ảnh vào bảng images nếu không bị trùng."""
-    if not is_duplicate_image(camera_id, animal_name, timestamp):
+def save_image_to_db(camera_id, object_name, image_path, timestamp):
+    if not is_duplicate_image(camera_id, object_name, timestamp):
         sql = "INSERT INTO images (camera_id, animal_name, information, created_at) VALUES (%s, %s, %s, %s)"
-        cursor.execute(sql, (camera_id, animal_name, image_path, timestamp))
+        cursor.execute(sql, (camera_id, object_name, image_path, timestamp))
         db.commit()
-        print(f"✅ Đã lưu: {animal_name} - {image_path} ({timestamp})")
+        print(f"✅ Đã lưu: {object_name} - {image_path} ({timestamp})")
     else:
-        print(f"⚠ Ảnh {animal_name} với thời gian {timestamp} đã tồn tại, bỏ qua.")
+        print(f"⚠ Ảnh {object_name} với thời gian {timestamp} đã tồn tại, bỏ qua.")
 
 def generate_frames():
-    cap = cv2.VideoCapture(0)  # Chỉnh camera index nếu cần
-    camera_id = 1  # ID giả định, có thể lấy từ request hoặc config
+    cap = cv2.VideoCapture(0)
+    camera_id = 1
+    previous_frame = None
 
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
             break
 
-        results = model(frame)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray = cv2.GaussianBlur(gray, (21, 21), 0)
+
         person_detected = False
 
-        for r in results:
-            for box in r.boxes:
-                class_id = int(box.cls[0])
-                label = model.names[class_id]
-                conf = box.conf[0].item()
+        if previous_frame is not None:
+            frame_diff = cv2.absdiff(previous_frame, gray)
+            _, thresh = cv2.threshold(frame_diff, 30, 255, cv2.THRESH_BINARY)
+            motion_level = cv2.countNonZero(thresh)
 
-                if label in animal_classes or label == "person":
-                    x1, y1, x2, y2 = map(int, box.xyxy[0])
-                    color = (0, 255, 0) if label != "person" else (0, 0, 255)
-                    cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
-                    cv2.putText(frame, f"{label} ({conf:.2f})", (x1, y1 - 10), 
-                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+            if motion_level > 5000:
+                results = model(frame)
+                for r in results:
+                    for box in r.boxes:
+                        class_id = int(box.cls[0])
+                        label = model.names[class_id]
+                        conf = box.conf[0].item()
+                        
+                        if label == "person":
+                            person_detected = True
+                            color = (0, 0, 255)
+                        else:
+                            color = (0, 255, 0)
 
-                    if label == "person":
-                        person_detected = True
-                    elif label in animal_classes:
-                        # Lưu ảnh khi phát hiện động vật
-                        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Lấy thời gian chính xác
-                        image_filename = f"{label}_{timestamp.replace(':', '-').replace(' ', '_')}.jpg"
-                        image_path = os.path.join(IMAGE_DIR, image_filename)
-                        cv2.imwrite(image_path, frame)
+                        x1, y1, x2, y2 = map(int, box.xyxy[0])
+                        cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+                        cv2.putText(frame, f"{label} ({conf:.2f})", (x1, y1 - 10), 
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-                        # Lưu vào database (tránh trùng lặp)
-                        save_image_to_db(camera_id, label, image_path, timestamp)
+                        if label in animal_classes or label == "person":
+                            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            image_filename = f"{label}_{timestamp.replace(':', '-').replace(' ', '_')}.jpg"
+                            image_path = os.path.join(IMAGE_DIR, image_filename)
+                            cv2.imwrite(image_path, frame)
+                            save_image_to_db(camera_id, label, image_path, timestamp)
 
         if person_detected:
             cv2.putText(frame, "⚠ WARNING: Human detected!", (50, 50),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
+
+        previous_frame = gray.copy()
 
         _, buffer = cv2.imencode('.jpg', frame)
         frame_bytes = buffer.tobytes()

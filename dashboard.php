@@ -62,6 +62,10 @@ $result = $stmt->get_result();
                 <i class="bi bi-plus-circle"></i> Thêm Camera
             </button>
         </div>
+        <div class="mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm camera...">
+        </div>
+
         <table class="table table-bordered table-hover">
             <thead class="table-dark">
                 <tr>
@@ -73,7 +77,7 @@ $result = $stmt->get_result();
                     <th>Hành động</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="cameraTable">
                 <?php if ($result->num_rows > 0): ?>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
@@ -88,13 +92,13 @@ $result = $stmt->get_result();
                                     <span class="badge bg-danger">Đã tắt</span>
                                 <?php endif; ?>
                             </td>
-                            <td><?= htmlspecialchars($row['name']) ?></td>
-                            <td><?= htmlspecialchars($row['area']) ?></td>
-                            <td><?= htmlspecialchars($row['description']) ?></td>
+                            <td class="camera-name"><?= htmlspecialchars($row['name']) ?></td>
+                            <td class="camera-area"><?= htmlspecialchars($row['area']) ?></td>
+                            <td class="camera-description"><?= htmlspecialchars($row['description']) ?></td>
                             <td>
                                 <a href="camera_details.php?id=<?= $row['id'] ?>" target="_blank" class="btn btn-info btn-sm">Xem</a>
-                                <a href="edit_camera.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Sửa</a>
-                                <a href="delete_camera.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa camera này?')">Xóa</a>
+                                <button class="btn btn-warning btn-sm" onclick="showEditModal(<?= $row['id'] ?>, '<?= htmlspecialchars($row['name']) ?>', '<?= htmlspecialchars($row['area']) ?>', '<?= htmlspecialchars($row['description']) ?>')">Sửa</button>
+                                <button class="btn btn-danger btn-sm" onclick="showDeleteModal(<?= $row['id'] ?>)">Xóa</button>
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -139,6 +143,58 @@ $result = $stmt->get_result();
         </div>
     </div>
 
+    <!-- Modal Sửa Camera -->
+    <div class="modal fade" id="editCameraModal" tabindex="-1" aria-labelledby="editCameraModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCameraModalLabel">Chỉnh sửa Camera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editCameraForm" action="edit_camera.php" method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" id="editCameraId" name="camera_id">
+                        <div class="mb-3">
+                            <label for="editCameraName" class="form-label">Tên Camera</label>
+                            <input type="text" class="form-control" id="editCameraName" name="camera_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCameraArea" class="form-label">Khu vực</label>
+                            <input type="text" class="form-control" id="editCameraArea" name="camera_area" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCameraDescription" class="form-label">Mô tả</label>
+                            <textarea class="form-control" id="editCameraDescription" name="camera_description" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Xác nhận Xóa Camera -->
+    <div class="modal fade" id="deleteCameraModal" tabindex="-1" aria-labelledby="deleteCameraModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCameraModalLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xóa camera này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function toggleStatus(cameraId, currentStatus) {
@@ -160,6 +216,56 @@ $result = $stmt->get_result();
             });
         }
     </script>
+    <script>
+        // Hiển thị modal sửa camera
+        function showEditModal(id, name, area, description) {
+            document.getElementById('editCameraId').value = id;
+            document.getElementById('editCameraName').value = name;
+            document.getElementById('editCameraArea').value = area;
+            document.getElementById('editCameraDescription').value = description;
+            var editModal = new bootstrap.Modal(document.getElementById('editCameraModal'));
+            editModal.show();
+        }
+
+        // Hiển thị modal xác nhận xóa camera
+        let deleteCameraId = null;
+        function showDeleteModal(id) {
+            deleteCameraId = id;
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteCameraModal'));
+            deleteModal.show();
+        }
+
+        // Xác nhận xóa camera
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            if (deleteCameraId) {
+                fetch('delete_camera.php?id=' + deleteCameraId, {
+                    method: 'GET'
+                }).then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                }).catch(error => console.error(error));
+            }
+        });
+    </script>
+    <script>
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#cameraTable tr");
+
+        rows.forEach(row => {
+            let name = row.querySelector(".camera-name").textContent.toLowerCase();
+            let area = row.querySelector(".camera-area").textContent.toLowerCase();
+            let description = row.querySelector(".camera-description").textContent.toLowerCase();
+
+            if (name.includes(filter) || area.includes(filter) || description.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
