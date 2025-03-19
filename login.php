@@ -21,8 +21,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
 
-            echo json_encode(["status" => "success", "redirect" => "dashboard.php"]);
+            // Điều hướng theo vai trò
+            if ($user['role'] == 0) {
+                echo json_encode(["status" => "success", "redirect" => "dashboard.php"]);
+            } elseif ($user['role'] == 1) {
+                echo json_encode(["status" => "success", "redirect" => "admin/index.php"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Vai trò không hợp lệ!"]);
+            }
         } else {
             echo json_encode(["status" => "error", "message" => "Sai mật khẩu!"]);
         }

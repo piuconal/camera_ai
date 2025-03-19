@@ -249,23 +249,23 @@ $result = $stmt->get_result();
         });
     </script>
     <script>
-    document.getElementById("searchInput").addEventListener("keyup", function() {
-        let filter = this.value.toLowerCase();
-        let rows = document.querySelectorAll("#cameraTable tr");
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#cameraTable tr");
 
-        rows.forEach(row => {
-            let name = row.querySelector(".camera-name").textContent.toLowerCase();
-            let area = row.querySelector(".camera-area").textContent.toLowerCase();
-            let description = row.querySelector(".camera-description").textContent.toLowerCase();
+            rows.forEach(row => {
+                let name = row.querySelector(".camera-name").textContent.toLowerCase();
+                let area = row.querySelector(".camera-area").textContent.toLowerCase();
+                let description = row.querySelector(".camera-description").textContent.toLowerCase();
 
-            if (name.includes(filter) || area.includes(filter) || description.includes(filter)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
+                if (name.includes(filter) || area.includes(filter) || description.includes(filter)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>
