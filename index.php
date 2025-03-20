@@ -14,6 +14,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        #loginMessage {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20%;
+            z-index: 100000;
+        }
+
         .video-background {
             position: fixed;
             top: 0;
@@ -174,7 +183,6 @@
     </style>
 </head>
 <body>
-
 <!-- Video Background -->
 <div class="video-background">
     <video id="background-video" autoplay muted loop>
@@ -285,6 +293,7 @@
     </div>
 </div>
 
+<div id="loginMessage"></div>
 <!-- Modal Đăng Nhập -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -331,9 +340,8 @@
 
         document.getElementById("loginForm").addEventListener("submit", async function (event) {
             event.preventDefault();
-            
-            const formData = new FormData(this);
 
+            const formData = new FormData(this);
             const response = await fetch("login.php", {
                 method: "POST",
                 body: formData
@@ -341,14 +349,23 @@
 
             const result = await response.json();
 
-            if (result.status === "success") {
-                window.location.href = result.redirect;
-            } else {
-                document.getElementById("loginMessage").innerHTML = `<div class="alert alert-danger">${result.message}</div>`;
+            const loginMessage = document.getElementById("loginMessage");
+            if (loginMessage) {
+                loginMessage.innerHTML = `<div class="alert alert-danger">${result.message}</div>`;
+                loginMessage.style.transition = "opacity 0.5s ease";
+                loginMessage.style.opacity = "1"; // Hiện ra
+
+                setTimeout(() => {
+                    loginMessage.style.opacity = "0"; // Ẩn dần
+                    setTimeout(() => {
+                        loginMessage.innerHTML = ""; // Xóa nội dung
+                    }, 500); // Chờ hiệu ứng mờ hoàn tất
+                }, 3000);
             }
         });
 
-            });
+
+    });
 </script>
 <script>
     document.getElementById("toggle-mode").addEventListener("click", function() {
