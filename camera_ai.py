@@ -2,6 +2,9 @@ import cv2
 import torch
 import os
 import mysql.connector
+import requests
+import yagmail
+import threading
 from ultralytics import YOLO
 from flask import Flask, Response
 from datetime import datetime
@@ -28,6 +31,51 @@ animal_classes = [name for name in coco_classes.values() if name not in ["person
 IMAGE_DIR = "static/images/"
 os.makedirs(IMAGE_DIR, exist_ok=True)
 
+# ---- [1] Cấu hình gửi Email ----
+EMAIL = "tuan20026042@gmail.com"
+APP_PASSWORD = "hnmn miyj hesm rjib"
+TO_EMAIL = "hcboy1106@gmail.com"
+# TO_EMAIL = "anhtuan20026042@gmail.com"
+
+yag = yagmail.SMTP(EMAIL, APP_PASSWORD)
+
+def send_email():
+    try:
+        yag.send(
+            to=TO_EMAIL,
+            subject="Thông báo Camera_AI",
+            contents="📢 Có người xâm nhập!"
+        )
+        print("✅ Email sent!")
+    except Exception as e:
+        print("❌ Email error:", str(e))
+
+# ---- [2] Cấu hình gửi Telegram ----
+TELEGRAM_TOKEN = "7594992745:AAGBJpujvYNEKYh3Gq_QySaUgLDhK8PRieg"
+CHAT_ID = "2104586242"
+# TELEGRAM_TOKEN = "7817293190:AAEPvmsmvzdDDQ1NjPKDqkhC338--tjnrBA"  # Nhập Token bot của bạn
+# CHAT_ID = "1319286596"  # Nhập chat_id của bạn
+
+def send_telegram():
+    MESSAGE = "📢 Có người xâm nhập!"
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    data = {"chat_id": CHAT_ID, "text": MESSAGE}
+
+    response = requests.post(url, data=data)
+
+    if response.status_code == 200:
+        print("✅ Telegram message sent!")
+    else:
+        print("❌ Telegram error:", response.text)
+
+def send_notifications():
+    """ Gửi email và tin nhắn Telegram trong nền """
+    email_thread = threading.Thread(target=send_email)
+    telegram_thread = threading.Thread(target=send_telegram)
+
+    email_thread.start()
+    telegram_thread.start()
+
 def is_duplicate_image(camera_id, object_name, timestamp):
     sql = "SELECT COUNT(*) FROM images WHERE camera_id = %s AND animal_name = %s AND created_at = %s"
     cursor.execute(sql, (camera_id, object_name, timestamp))
@@ -39,6 +87,12 @@ def save_image_to_db(camera_id, object_name, image_path, timestamp):
         cursor.execute(sql, (camera_id, object_name, image_path, timestamp))
         db.commit()
         print(f"✅ Đã lưu: {object_name} - {image_path} ({timestamp})")
+
+        # Nếu đối tượng là "person", gửi thông báo trong nền
+        if object_name == "person":
+            send_notifications()
+            print("🚨 Đã gửi thông báo!")
+
     else:
         print(f"⚠ Ảnh {object_name} với thời gian {timestamp} đã tồn tại, bỏ qua.")
 

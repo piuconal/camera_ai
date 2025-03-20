@@ -6,3 +6,4 @@
 *.trt
 
 static/
+send_noti.py
