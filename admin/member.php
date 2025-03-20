@@ -114,12 +114,11 @@ $result = $conn->query($sql);
 </div>
 
 <!-- Modal Sửa Người Dùng -->
-<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">   
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editUserModalLabel">Chỉnh sửa Người Dùng</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form id="editUserForm" action="edit_user.php" method="POST">
                 <div class="modal-body">
@@ -176,7 +175,6 @@ $result = $conn->query($sql);
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteUserModalLabel">Xác nhận xóa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 Bạn có chắc chắn muốn xóa người dùng này không?
