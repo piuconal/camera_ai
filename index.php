@@ -20,7 +20,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 20%;
-            z-index: 100000;
+            z-index: 10000;
         }
 
         .video-background {
@@ -183,6 +183,8 @@
     </style>
 </head>
 <body>
+<div id="loginMessage"></div>
+
 <!-- Video Background -->
 <div class="video-background">
     <video id="background-video" autoplay muted loop>
@@ -293,7 +295,6 @@
     </div>
 </div>
 
-<div id="loginMessage"></div>
 <!-- Modal Đăng Nhập -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -342,28 +343,31 @@
             event.preventDefault();
 
             const formData = new FormData(this);
-            const response = await fetch("login.php", {
-                method: "POST",
-                body: formData
-            });
 
-            const result = await response.json();
+            try {
+                const response = await fetch("login.php", {
+                    method: "POST",
+                    body: formData
+                });
 
-            const loginMessage = document.getElementById("loginMessage");
-            if (loginMessage) {
-                loginMessage.innerHTML = `<div class="alert alert-danger">${result.message}</div>`;
-                loginMessage.style.transition = "opacity 0.5s ease";
-                loginMessage.style.opacity = "1"; // Hiện ra
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
 
-                setTimeout(() => {
-                    loginMessage.style.opacity = "0"; // Ẩn dần
-                    setTimeout(() => {
-                        loginMessage.innerHTML = ""; // Xóa nội dung
-                    }, 500); // Chờ hiệu ứng mờ hoàn tất
-                }, 3000);
+                const result = await response.json();
+
+                if (result && result.status === "success" && result.redirect) {
+                    window.location.href = result.redirect;
+                } else {
+                    const loginMessage = document.getElementById("loginMessage");
+                    if (loginMessage) {
+                        loginMessage.innerHTML = `<div class="alert alert-danger">${result.message || "Login failed"}</div>`;
+                    }
+                }
+            } catch (error) {
+                console.error("Error during login:", error);
             }
         });
-
 
     });
 </script>
