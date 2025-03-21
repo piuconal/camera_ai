@@ -139,13 +139,13 @@
             bottom: 20px;
             left: 20px;
             margin: 0;
-            width: 220px;
+            width: 270px;
             max-width: 100%;
         }
 
         /* Thiết kế modal */
         .weather-modal .modal-content {
-            background: rgba(148, 205, 252, 0.95);
+            background: rgba(148, 205, 252, 0.75);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
