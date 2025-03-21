@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        #animalList {
+            max-height: 140px; /* Giới hạn chiều cao tối đa */
+            overflow-y: auto; /* Thêm thanh cuộn dọc khi danh sách quá dài */
+            border: 1px solid #ddd; /* Tạo viền nhẹ để dễ nhìn hơn */
+            border-radius: 5px;
+        }
         #loginMessage {
             position: absolute;
             top: 15%;
