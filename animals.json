@@ -16,5 +16,185 @@
     "lifespan": "Tuổi thọ trung bình của voi châu Á dao động từ 50 - 70 năm trong môi trường hoang dã, tuy nhiên, trong điều kiện nuôi nhốt tốt, chúng có thể sống lâu hơn.",
     "description": "Voi châu Á là loài động vật có vú lớn nhất châu Á với đặc điểm nhận dạng là đôi tai nhỏ hơn voi châu Phi và phần đầu có hình vòm. Chúng có trí thông minh cao, khả năng ghi nhớ tốt và thường sống theo bầy đàn do voi cái dẫn đầu.",
     "image": "https://image.tienphong.vn/w1000/Uploaded/2020/qhj_hiobgobrfc/2018_11_22/tien_phong_voi_chau_a_inqa.jpg"
+  },
+  {
+    "name": "Gấu trúc khổng lồ",
+    "scientific_name": "Ailuropoda melanoleuca",
+    "habitat": "Gấu trúc khổng lồ chủ yếu sống tại các khu rừng tre núi cao ở Trung Quốc. Chúng thích môi trường có khí hậu mát mẻ và có nhiều tre để ăn.",
+    "diet": "Mặc dù thuộc bộ ăn thịt, nhưng thức ăn chính của gấu trúc là tre, chiếm khoảng 99% chế độ ăn của chúng. Ngoài ra, chúng cũng có thể ăn hoa quả, rễ cây và đôi khi là côn trùng.",
+    "lifespan": "Gấu trúc khổng lồ có thể sống khoảng 20 năm trong tự nhiên và lên đến 30 năm trong điều kiện nuôi nhốt.",
+    "description": "Gấu trúc khổng lồ nổi bật với bộ lông đen trắng đặc trưng, thân hình mũm mĩm và dáng đi lạch bạch. Chúng là biểu tượng bảo tồn động vật hoang dã trên thế giới.",
+    "image": "https://th.bing.com/th/id/OIP.SWwB0hA_y3k8XkiPjYD2ygHaE6?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Sư tử",
+    "scientific_name": "Panthera leo",
+    "habitat": "Sư tử chủ yếu sống tại các đồng cỏ và savanna ở châu Phi. Chúng cần khu vực mở rộng lớn để săn mồi và sinh sống theo bầy đàn.",
+    "diet": "Sư tử là động vật săn mồi, chuyên ăn thịt và săn các loài động vật có vú lớn như ngựa vằn, linh dương, trâu rừng. Chúng cũng có thể ăn xác thối khi cần thiết.",
+    "lifespan": "Sư tử có thể sống từ 10 - 14 năm trong tự nhiên, nhưng trong điều kiện nuôi nhốt, chúng có thể sống đến 20 năm.",
+    "description": "Sư tử là một trong những loài mèo lớn có sức mạnh và sự dũng mãnh. Con đực có bờm lớn đặc trưng, trong khi con cái thường tham gia săn mồi nhiều hơn.",
+    "image": "https://static.vinwonders.com/production/su-tu-top-banner.jpg"
+  },
+  {
+    "name": "Chim cánh cụt hoàng đế",
+    "scientific_name": "Aptenodytes forsteri",
+    "habitat": "Chim cánh cụt hoàng đế sinh sống tại Nam Cực, chịu được nhiệt độ cực thấp nhờ lớp mỡ dày và lông dày đặc.",
+    "diet": "Chúng chủ yếu ăn cá, mực và các sinh vật biển nhỏ khác. Chúng có thể lặn sâu hàng trăm mét để săn mồi.",
+    "lifespan": "Tuổi thọ trung bình của chim cánh cụt hoàng đế là khoảng 15 - 20 năm.",
+    "description": "Chim cánh cụt hoàng đế là loài chim cánh cụt lớn nhất, nổi bật với bộ lông vàng trên cổ. Chúng có khả năng chịu lạnh cực kỳ tốt và thực hiện các hành trình dài để sinh sản.",
+    "image": "https://th.bing.com/th/id/OIP.gDg467qDElHZ3mBuxQhOowHaD4?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Hươu cao cổ",
+    "scientific_name": "Giraffa camelopardalis",
+    "habitat": "Hươu cao cổ sống ở các đồng cỏ và savanna tại châu Phi, đặc biệt là ở những khu vực có nhiều cây keo.",
+    "diet": "Chúng chủ yếu ăn lá cây, đặc biệt là lá keo, nhờ chiếc cổ dài giúp chúng tiếp cận thức ăn ở những nơi cao.",
+    "lifespan": "Hươu cao cổ có thể sống từ 20 - 25 năm trong tự nhiên và lên đến 30 năm trong điều kiện nuôi nhốt.",
+    "description": "Hươu cao cổ là loài động vật có vú cao nhất thế giới, với cổ dài và chân cao. Chúng có màu lông đốm đặc trưng, giúp ngụy trang trong môi trường tự nhiên.",
+    "image": "https://static.vinwonders.com/production/huou-cao-co-top-banner.jpg"
+  },
+  {
+    "name": "Báo đốm",
+    "scientific_name": "Panthera onca",
+    "habitat": "Báo đốm sống chủ yếu ở rừng mưa nhiệt đới Nam Mỹ, đặc biệt là khu vực Amazon, nhưng cũng xuất hiện ở savanna và đầm lầy.",
+    "diet": "Chúng là động vật ăn thịt, săn mồi bao gồm hươu, lợn rừng, cá sấu và thậm chí cả cá.",
+    "lifespan": "Báo đốm có thể sống từ 12 - 15 năm trong tự nhiên và lên đến 20 năm trong điều kiện nuôi nhốt.",
+    "description": "Báo đốm là loài mèo lớn thứ ba thế giới, có bộ lông đốm đặc trưng giúp chúng ngụy trang khi săn mồi. Chúng có lực cắn mạnh nhất trong số các loài mèo lớn.",
+    "image": "https://th.bing.com/th/id/OIP.8VUXoVeKmjUgQnFNhCTOVgHaFj?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Cá heo mũi chai",
+    "scientific_name": "Tursiops truncatus",
+    "habitat": "Cá heo mũi chai sống chủ yếu ở các đại dương nhiệt đới và ôn đới trên toàn thế giới, thường xuất hiện gần bờ biển.",
+    "diet": "Chúng ăn cá, mực và động vật giáp xác, sử dụng sóng siêu âm để định vị con mồi.",
+    "lifespan": "Cá heo mũi chai có thể sống từ 40 - 50 năm.",
+    "description": "Cá heo mũi chai là loài động vật có vú thông minh, có khả năng giao tiếp phức tạp và thường tương tác với con người. Chúng có tốc độ bơi nhanh và có thể nhảy lên khỏi mặt nước.",
+    "image": "https://th.bing.com/th/id/OIP.yChbQA9nxJGNxwAMmkoLXAHaD9?w=1254&h=670&rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Lạc đà Bactrian",
+    "scientific_name": "Camelus bactrianus",
+    "habitat": "Lạc đà Bactrian sinh sống chủ yếu ở các sa mạc và vùng khô hạn của Trung Á.",
+    "diet": "Chúng ăn cỏ, lá cây, và có khả năng chịu hạn tốt nhờ dự trữ nước trong bướu.",
+    "lifespan": "Lạc đà Bactrian có thể sống từ 30 - 50 năm.",
+    "description": "Lạc đà Bactrian có hai bướu lớn giúp chúng dự trữ năng lượng và nước. Chúng thích nghi tốt với điều kiện khắc nghiệt của sa mạc.",
+    "image": "https://th.bing.com/th/id/OIP.-tRBJpYMSTrlHRd3-H4gFwHaF4?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Cú đại bàng",
+    "scientific_name": "Bubo bubo",
+    "habitat": "Cú đại bàng sinh sống ở nhiều môi trường khác nhau, từ rừng, núi đến đồng cỏ và sa mạc.",
+    "diet": "Chúng săn các loài động vật nhỏ như chuột, chim, thỏ và đôi khi cả cá.",
+    "lifespan": "Cú đại bàng có thể sống từ 20 - 30 năm trong tự nhiên và lâu hơn trong điều kiện nuôi nhốt.",
+    "description": "Cú đại bàng là một trong những loài cú lớn nhất thế giới, có đôi mắt sáng và khả năng săn mồi vào ban đêm nhờ thính giác tuyệt vời.",
+    "image": "https://media.istockphoto.com/photos/eagle-owl-on-white-background-picture-id137417965?k=20&m=137417965&s=612x612&w=0&h=Swsp9HNxpvVO64-T_eTdIkeY3uJxW_nQlfppSLeHPIo="
+  },
+  {
+    "name": "Chồn đất",
+    "scientific_name": "Suricata suricatta",
+    "habitat": "Chồn đất sống chủ yếu ở các vùng sa mạc và thảo nguyên khô cằn của châu Phi, đặc biệt là tại sa mạc Kalahari và Namib.",
+    "diet": "Chúng ăn côn trùng, bò sát nhỏ, trứng, rễ cây và thỉnh thoảng cả chim nhỏ.",
+    "lifespan": "Chồn đất có thể sống từ 12 - 14 năm trong điều kiện nuôi nhốt, nhưng thường chỉ sống khoảng 6 - 8 năm trong tự nhiên.",
+    "description": "Chồn đất là loài động vật sống theo nhóm với tập tính xã hội cao. Chúng có khả năng đứng bằng hai chân sau để quan sát môi trường xung quanh nhằm tránh kẻ săn mồi.",
+    "image": "https://th.bing.com/th/id/OIP.xall1JYvz7a1nRpcgII9aAHaEn?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Sói xám",
+    "scientific_name": "Canis lupus",
+    "habitat": "Sói xám phân bố rộng rãi từ Bắc Mỹ, châu Âu đến châu Á, chủ yếu sống ở rừng, thảo nguyên và vùng lãnh nguyên.",
+    "diet": "Sói xám là loài săn mồi theo đàn, ăn thịt các loài động vật lớn như hươu, nai, tuần lộc, cũng như động vật nhỏ hơn khi cần thiết.",
+    "lifespan": "Sói xám có thể sống từ 6 - 8 năm trong tự nhiên và lên đến 16 năm trong điều kiện nuôi nhốt.",
+    "description": "Sói xám là loài động vật có tính xã hội cao, thường sống theo bầy đàn với hệ thống phân cấp rõ ràng. Chúng có khả năng giao tiếp tốt thông qua tiếng hú, cử chỉ và khứu giác.",
+    "image": "https://th.bing.com/th/id/OIP.mKEivotFUIUuINaYM3a9JgHaEK?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Cầy mangut",
+    "scientific_name": "Herpestes javanicus",
+    "habitat": "Cầy mangut sống ở nhiều môi trường khác nhau từ rừng nhiệt đới, đồng cỏ đến các khu vực bán hoang mạc.",
+    "diet": "Chúng ăn nhiều loại thức ăn như côn trùng, bò sát, trứng, chim nhỏ và đôi khi cả động vật có nọc độc như rắn hổ mang.",
+    "lifespan": "Cầy mangut có thể sống từ 6 - 10 năm trong tự nhiên và lâu hơn khi được nuôi nhốt.",
+    "description": "Cầy mangut nổi tiếng với khả năng săn rắn nhờ sự nhanh nhẹn và phản xạ tuyệt vời. Chúng có bộ lông màu nâu xám giúp ngụy trang trong môi trường tự nhiên.",
+    "image": "https://th.bing.com/th/id/OIP.Uz63W6wRUqoGOUiZ6Y_1VgHaE7?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Chuột túi đỏ",
+    "scientific_name": "Macropus rufus",
+    "habitat": "Chuột túi đỏ sinh sống chủ yếu ở các vùng đồng cỏ khô cằn và sa mạc của Úc.",
+    "diet": "Chúng ăn cỏ, lá cây và các loại thực vật có sẵn trong môi trường sống.",
+    "lifespan": "Chuột túi đỏ có thể sống từ 12 - 18 năm trong điều kiện tự nhiên.",
+    "description": "Chuột túi đỏ là loài chuột túi lớn nhất thế giới, có khả năng nhảy xa và nhanh để tránh kẻ săn mồi. Chúng có đôi chân mạnh mẽ và chiếc túi bụng để nuôi con nhỏ.",
+    "image": "https://photo-cms-kienthuc.zadn.vn/zoomh/800/uploaded/ctvkhoahoc/2015_11_17/nhung-su-that-cuc-thu-vi-ve-loai-chuot-tui-Hinh-5.jpg"
+  },
+  {
+    "name": "Rùa cạn châu Phi",
+    "scientific_name": "Centrochelys sulcata",
+    "habitat": "Rùa cạn châu Phi sống ở các vùng sa mạc và bán hoang mạc ở khu vực Sahel của châu Phi.",
+    "diet": "Chúng chủ yếu ăn cỏ, lá cây và thực vật mọng nước để bổ sung nước trong điều kiện khô hạn.",
+    "lifespan": "Rùa cạn châu Phi có thể sống từ 50 - 100 năm.",
+    "description": "Đây là một trong những loài rùa cạn lớn nhất thế giới, có mai cứng và khả năng chịu hạn rất tốt. Chúng có thói quen đào hang để tránh nhiệt độ cao ban ngày.",
+    "image": "https://media-cdn-v2.laodong.vn/storage/newsportal/2020/1/2/775964/Rua.00_00_10_11.Stil.jpg?w=800&crop=auto&scale=both"
+  },
+  {
+    "name": "Chó",
+    "scientific_name": "Canis lupus familiaris",
+    "habitat": "Chó được nuôi trên khắp thế giới và có thể sống ở nhiều môi trường khác nhau, từ nhà ở, trang trại đến các vùng hoang dã.",
+    "diet": "Chó là loài ăn tạp, chúng có thể ăn thịt, rau củ, hạt và các loại thực phẩm chế biến cho vật nuôi.",
+    "lifespan": "Chó có tuổi thọ trung bình từ 10 - 15 năm, tùy vào giống và điều kiện chăm sóc.",
+    "description": "Chó là loài động vật trung thành, thông minh và có khả năng huấn luyện cao. Chúng được nuôi để làm bạn, giữ nhà, hỗ trợ công việc chăn nuôi và thậm chí tham gia cứu hộ.",
+    "image": "https://th.bing.com/th/id/R.83feadda77a3041200c0c9e5d981e5ab?rik=7Kd8r6qSNl8fGA&riu=http%3a%2f%2fcdn.tgdd.vn%2fFiles%2f2022%2f12%2f10%2f1494803%2ftim-hieu-ve-cho-phu-quoc-nguon-goc-dac-diem-cach-nuoi-gia-ban-202212100743155549.jpg&ehk=yYYOrwVdgUbCSZhZzAdChMeB0rgb%2flnNRCf4QUBbjv0%3d&risl=&pid=ImgRaw&r=0"
+  },
+  {
+    "name": "Mèo",
+    "scientific_name": "Felis catus",
+    "habitat": "Mèo sống chủ yếu trong môi trường gia đình, nhưng cũng có thể sống hoang dã ở nhiều vùng khí hậu khác nhau trên thế giới.",
+    "diet": "Mèo là loài ăn thịt, chế độ ăn của chúng chủ yếu bao gồm cá, thịt gà, bò và thức ăn chế biến dành riêng cho mèo.",
+    "lifespan": "Mèo có thể sống từ 12 - 20 năm, tùy vào giống loài và chế độ chăm sóc.",
+    "description": "Mèo là loài động vật nhanh nhẹn, có khả năng leo trèo và săn mồi tốt. Chúng cũng được biết đến với thói quen thích liếm lông và ngủ nhiều.",
+    "image": "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2023/1/18/1139731/Meo-1.jpg"
+  },
+  {
+    "name": "Lợn",
+    "scientific_name": "Sus scrofa domesticus",
+    "habitat": "Lợn được nuôi chủ yếu ở các trang trại trên toàn thế giới và có thể thích nghi với nhiều môi trường khác nhau.",
+    "diet": "Lợn là loài ăn tạp, thức ăn của chúng bao gồm ngũ cốc, rau củ, trái cây và thức ăn chăn nuôi công nghiệp.",
+    "lifespan": "Lợn có thể sống từ 10 - 15 năm, nhưng trong chăn nuôi thương mại, chúng thường được nuôi từ 6 - 8 tháng trước khi xuất chuồng.",
+    "description": "Lợn là loài động vật thông minh, có khả năng học tập và nhận diện rất tốt. Chúng thường sống theo bầy đàn và có tập tính xã hội cao.",
+    "image": "https://khuyennonghaiphong.gov.vn/Data/images/l%E1%BB%A3n(1).png"
+  },
+  {
+    "name": "Gà",
+    "scientific_name": "Gallus gallus domesticus",
+    "habitat": "Gà được nuôi phổ biến ở các trang trại và hộ gia đình trên toàn cầu, từ nông thôn đến thành thị.",
+    "diet": "Gà ăn ngũ cốc, hạt, côn trùng và rau củ, tùy theo điều kiện nuôi dưỡng.",
+    "lifespan": "Gà có thể sống từ 5 - 10 năm tùy vào giống loài và điều kiện nuôi dưỡng.",
+    "description": "Gà là loài gia cầm phổ biến, cung cấp thịt và trứng cho con người. Chúng có tập tính bới đất để tìm thức ăn và sống theo bầy đàn.",
+    "image": "https://th.bing.com/th/id/OIP.v76ED48mSG2SlzEq0AmlYgHaEK?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Khủng long bạo chúa",
+    "scientific_name": "Tyrannosaurus rex",
+    "habitat": "Khủng long bạo chúa sống trong các khu vực đồng bằng và rừng rậm ở Bắc Mỹ vào cuối kỷ Phấn trắng, khoảng 68 - 66 triệu năm trước.",
+    "diet": "Là loài săn mồi đỉnh cao, T-Rex chủ yếu ăn thịt các loài khủng long khác, kể cả loài ăn cỏ lớn.",
+    "lifespan": "Các nghiên cứu ước tính T-Rex có thể sống đến 28 - 30 năm.",
+    "description": "Khủng long bạo chúa là một trong những loài khủng long nổi tiếng nhất với kích thước khổng lồ, hàm răng sắc nhọn và khả năng săn mồi đáng sợ.",
+    "image": "https://st.quantrimang.com/photos/image/2020/12/31/khung-long-bao-chua-700.jpg"
+  },
+  {
+    "name": "Chim gõ kiến",
+    "scientific_name": "Picidae",
+    "habitat": "Chim gõ kiến sinh sống chủ yếu trong các khu rừng rậm, rừng lá kim và cả vùng đồng cỏ có cây cối rải rác.",
+    "diet": "Chúng ăn côn trùng, ấu trùng, nhựa cây và đôi khi cả hạt cây.",
+    "lifespan": "Chim gõ kiến có thể sống từ 4 - 12 năm tùy vào từng loài.",
+    "description": "Chim gõ kiến nổi bật với khả năng đục lỗ trên thân cây để tìm kiếm côn trùng và xây tổ. Chúng có bộ lông sặc sỡ và tiếng gõ đặc trưng.",
+    "image": "https://th.bing.com/th/id/OIP.ZTakvE-ccQVYAx2rAVPKaQHaFj?rs=1&pid=ImgDetMain"
+  },
+  {
+    "name": "Cá kiếm",
+    "scientific_name": "Xiphias gladius",
+    "habitat": "Cá kiếm sống ở các vùng biển nhiệt đới và ôn đới trên khắp thế giới, thường bơi ở vùng nước sâu.",
+    "diet": "Chúng ăn cá nhỏ, mực và động vật giáp xác.",
+    "lifespan": "Cá kiếm có thể sống từ 9 - 15 năm tùy vào giới tính và môi trường sống.",
+    "description": "Cá kiếm có đặc điểm nổi bật là chiếc mũi dài giống như thanh kiếm, giúp chúng săn mồi hiệu quả bằng cách đâm hoặc làm choáng con mồi.",
+    "image": "https://motortrip.vn/wp-content/uploads/2022/01/ca-kiem-14.jpg"
   }
 ]
