@@ -34,8 +34,8 @@ os.makedirs(IMAGE_DIR, exist_ok=True)
 # ---- [1] Cấu hình gửi Email ----
 EMAIL = "tuan20026042@gmail.com"
 APP_PASSWORD = "hnmn miyj hesm rjib"
-TO_EMAIL = "hcboy1106@gmail.com"
-# TO_EMAIL = "anhtuan20026042@gmail.com"
+# TO_EMAIL = "hcboy1106@gmail.com"
+TO_EMAIL = "anhtuan20026042@gmail.com"
 
 yag = yagmail.SMTP(EMAIL, APP_PASSWORD)
 
@@ -44,17 +44,19 @@ def send_email():
         yag.send(
             to=TO_EMAIL,
             subject="Thông báo Camera_AI",
-            contents="📢 Có người xâm nhập!"
+            contents="Có người xâm nhập!",
+            headers={"Content-Type": "text/plain"}
         )
+
         print("✅ Email sent!")
     except Exception as e:
         print("❌ Email error:", str(e))
 
 # ---- [2] Cấu hình gửi Telegram ----
-TELEGRAM_TOKEN = "7594992745:AAGBJpujvYNEKYh3Gq_QySaUgLDhK8PRieg"
-CHAT_ID = "2104586242"
-# TELEGRAM_TOKEN = "7817293190:AAEPvmsmvzdDDQ1NjPKDqkhC338--tjnrBA"  # Nhập Token bot của bạn
-# CHAT_ID = "1319286596"  # Nhập chat_id của bạn
+# TELEGRAM_TOKEN = "7594992745:AAGBJpujvYNEKYh3Gq_QySaUgLDhK8PRieg"
+# CHAT_ID = "2104586242"
+TELEGRAM_TOKEN = "7817293190:AAEPvmsmvzdDDQ1NjPKDqkhC338--tjnrBA"  # Nhập Token bot của bạn
+CHAT_ID = "1319286596"  # Nhập chat_id của bạn
 
 def send_telegram():
     MESSAGE = "📢 Có người xâm nhập!"
@@ -97,7 +99,7 @@ def save_image_to_db(camera_id, object_name, image_path, timestamp):
         print(f"⚠ Ảnh {object_name} với thời gian {timestamp} đã tồn tại, bỏ qua.")
 
 def generate_frames():
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(2)
     camera_id = 1
     previous_frame = None
 
