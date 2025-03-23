@@ -186,6 +186,28 @@
             max-height: 500px; /* Giới hạn chiều cao */
             overflow-y: auto; /* Cuộn khi nội dung dài */
         }
+        .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        border-radius: 20px;
+    }
+    .popup-content {
+        position: relative;
+        text-align: center;
+    }
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        cursor: pointer;
+    }
     </style>
 </head>
 <body>
@@ -327,11 +349,29 @@
 </div>
 
 <div class="search-container">
+    <button class="btn btn-primary mt-2 mb-2" onclick="showPopup()">Tra thông tin</button>
     <input type="text" id="searchAnimal" class="form-control" placeholder="Nhập tên động vật muốn biết thêm thông tin..." oninput="searchAnimal()">
     <ul id="animalList" class="list-group mt-2"></ul>
 </div>
 <div id="animalInfo"></div>
-
+<!-- Popup -->
+<div id="popup" class="popup d-none">
+    <div class="popup-content text-center">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h4>Tải ảnh lên</h4>
+        <input type="file" id="imageUpload" class="form-control-file" accept="image/*" onchange="uploadAndProcessImage()">
+        <div class="mt-3">
+            <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid d-none" style="max-width: 100%; height: 200px; object-fit: contain;">
+        </div>
+        <h4 class="mt-3">Thông tin:</h4>
+        <div id="loadingSpinner" class="d-none mt-3">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div id="info"></div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -400,6 +440,50 @@
 <script src="js/chatbot.js"></script>
 <script src="js/weather.js"></script>
 <script src="js/search_animal.js"></script>
+<script>
+    function showPopup() {
+        document.getElementById('popup').classList.remove('d-none');
+    }
+
+    function closePopup() {
+        document.getElementById('popup').classList.add('d-none');
+    }
+
+    function uploadAndProcessImage() {
+        const input = document.getElementById('imageUpload');
+        const preview = document.getElementById('preview');
+        const spinner = document.getElementById('loadingSpinner');
+        const formData = new FormData();
+        
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            formData.append("image", file);
+            
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.classList.remove('d-none');
+            }
+            reader.readAsDataURL(file);
+            
+            spinner.classList.remove('d-none');
+            
+            fetch("http://localhost:5001/process_image", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("info").innerHTML = `<p><strong>${data.name}</strong>: ${data.confidence}%</p><p>${data.info}</p>`;
+            })
+            .catch(error => console.error("Error:", error))
+            .finally(() => {
+                spinner.classList.add('d-none');
+            });
+        }
+    }
+
+</script>
 
 </body>
 </html>
