@@ -98,14 +98,22 @@ def save_image_to_db(camera_id, object_name, image_path, timestamp):
     else:
         print(f"⚠ Ảnh {object_name} với thời gian {timestamp} đã tồn tại, bỏ qua.")
 
+# Cấu hình RTSP URL (thay đổi nếu cần)
+RTSP_URL = "rtsp://admin:123123hc@192.168.1.11:554/onvif1"
+
 def generate_frames():
-    cap = cv2.VideoCapture(2)
+    cap = cv2.VideoCapture(RTSP_URL)
+    if not cap.isOpened():
+        print("❌ Không thể kết nối với camera!")
+        return
+
     camera_id = 1
     previous_frame = None
 
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
+            print("❌ Lỗi khi đọc frame từ camera!")
             break
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -156,6 +164,7 @@ def generate_frames():
                b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
 
     cap.release()
+
 
 @app.route('/video_feed')
 def video_feed():
